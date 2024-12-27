@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload CSV and Select Model</h1>
+
+        <!-- Display Error Messages -->
+        {% if error %}
+            <div class="error-message">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <!-- Upload Form -->
+        <form action="/predict" method="POST" enctype="multipart/form-data" class="form">
+            <label for="file">Upload CSV:</label>
+            <input type="file" name="file" id="file" required><br><br>
+            
+            <label for="model">Select Model:</label>
+            <select name="model" id="model">
+                <option value="logistic_regression">Logistic Regression</option>
+                <option value="decision_tree">Decision Tree</option>
+                <option value="random_forest">Random Forest</option>
+                <option value="knn">K-Nearest Neighbors</option>
+            </select><br><br>
+            
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <!-- Display Predictions in a Scrollable List -->
+        {% if predictions %}
+            <div class="predictions">
+                <!-- Updated title to include file name and selected model -->
+                <h3>Predictions for '{{ filename }}' using '{{ model_choice }}' model:</h3>
+                <div class="scrollable-list">
+                    <ul>
+                        {% for prediction in predictions %}
+                            <li>{{ prediction }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <!-- Button to Reset the Form -->
+            <button onclick="window.location.href='/';">Upload Another File</button>
+        {% endif %}
+    </div>
+</body>
+</html>
