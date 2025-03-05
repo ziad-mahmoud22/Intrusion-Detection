@@ -9,7 +9,7 @@ models = {
     "logistic_regression": joblib.load("logistic_regression_model.pkl"),
     "decision_tree": joblib.load("decision_tree_model.pkl"),
     "random_forest": joblib.load("random_forest_model.pkl"),
-    "knn": joblib.load("knn_model.pkl"),
+   # "knn": joblib.load("knn_model.pkl"),
 }
 
 # Route to the home page
